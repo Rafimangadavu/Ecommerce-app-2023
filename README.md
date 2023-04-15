@@ -24,4 +24,5 @@ Create new file router folder name authRoute and set up routing
 create new file in controllers folder name ad register controller
 npm i bcrypt 
 create new file in helper autHelper.js
-set up auth registration 
+set up auth registration and registration controller
+set up login controller in authController 
