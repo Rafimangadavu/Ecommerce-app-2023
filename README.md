@@ -11,4 +11,17 @@ create a new file in main folder server.js
 create server.
 First import express from express.
 Add package.json file "type": "module" for ES6 module.
-
+Install dotenv and morgan. Both import from server.
+set server in  dotenv.config()
+set up mongodb 
+Create new folder config and create a new file db.js in config folder.
+npm install mongoose.
+create connectDB function config/db.js and export it.
+import connectDB from server.js
+create five folders in project folder models, routes, helpers, middleware and controllers.
+create new file userModel.js in models folder.
+Create new file router folder name authRoute and set up routing
+create new file in controllers folder name ad register controller
+npm i bcrypt 
+create new file in helper autHelper.js
+set up auth registration 
