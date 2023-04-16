@@ -25,4 +25,17 @@ create new file in controllers folder name ad register controller
 npm i bcrypt 
 create new file in helper autHelper.js
 set up auth registration and registration controller
-set up login controller in authController 
+set up login controller in authController
+protected routes and authentication set up.
+create react app as name client
+open client folder, src folder in app.css and index.css complete remove.
+all react clean set up.
+bootstrap css cdn copy paste and javascript cdn copy paste 
+npm i react-router-dom
+footer set up 
+main page set up
+header set up
+set up header section add icon from bootstrap svg icon html code using for 
+set up page not found 
+SEO search engine optimization set up.
+Helmet installation process and meta tags set up in layout page
