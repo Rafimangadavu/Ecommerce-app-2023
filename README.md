@@ -53,3 +53,9 @@ create a new folder in Layout folder name as Private.js create private function.
 
 forgot password function add and page set up. add a column in userModel for answer.
 Moreover set login page and register pages all changes.
+Header page in dropdown menu add.
+Admin route for create a new folder name as admin
+user dashboard and admin dashboard is separation process
+Dashboard designing.
+Admin Dashboard and User Dashboard.
+All set up in Dashboards.
