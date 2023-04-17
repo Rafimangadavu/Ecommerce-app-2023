@@ -39,3 +39,14 @@ set up header section add icon from bootstrap svg icon html code using for
 set up page not found 
 SEO search engine optimization set up.
 Helmet installation process and meta tags set up in layout page
+Register Form creation process.
+Install axios and react-toastify. and set up register form.
+create a dotenv file client side set localhost:8080 set.
+concurrently package install.
+implementing context api
+useContext setting
+import useState, useContext, createContext from react.
+create a new folder in src name as context.
+create new file in context folder name as auth.js
+create a new file in component in for spinner.
+create a new folder in Layout folder name as Private.js create private function.
