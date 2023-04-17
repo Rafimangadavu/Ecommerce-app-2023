@@ -50,3 +50,6 @@ create a new folder in src name as context.
 create new file in context folder name as auth.js
 create a new file in component in for spinner.
 create a new folder in Layout folder name as Private.js create private function.
+
+forgot password function add and page set up. add a column in userModel for answer.
+Moreover set login page and register pages all changes.
