@@ -59,3 +59,6 @@ user dashboard and admin dashboard is separation process
 Dashboard designing.
 Admin Dashboard and User Dashboard.
 All set up in Dashboards.
+Category model setup.
+Create category, update Category, get category, deleteCategory
+create a new file model folder and create product model.
