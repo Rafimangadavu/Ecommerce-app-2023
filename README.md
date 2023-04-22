@@ -62,3 +62,5 @@ All set up in Dashboards.
 Category model setup.
 Create category, update Category, get category, deleteCategory
 create a new file model folder and create product model.
+create a new file in route folder name as product routes.
+create a new file in controller folder name as product controller.
