@@ -64,3 +64,8 @@ Create category, update Category, get category, deleteCategory
 create a new file model folder and create product model.
 create a new file in route folder name as product routes.
 create a new file in controller folder name as product controller.
+Category display process.
+update product and delete product.
+set up home page.
+filter category and product added.
+home display 6 products and loadmore function add.
