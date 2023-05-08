@@ -69,3 +69,4 @@ update product and delete product.
 set up home page.
 filter category and product added.
 home display 6 products and loadmore function add.
+search product page add
