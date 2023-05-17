@@ -71,3 +71,5 @@ filter category and product added.
 home display 6 products and loadmore function add.
 search product page creation
 product details page creation.
+product by category page set up
+cart page set up.

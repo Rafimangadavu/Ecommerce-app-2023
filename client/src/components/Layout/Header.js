@@ -5,9 +5,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchInput from '../Form/SearchInput';
 import useCategory from '../../hooks/useCategory';
+import { useCart } from '../../context/cart';
+import { Badge } from 'antd';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const[cart] = useCart()
   const categories = useCategory()
 
   const handleLogout = () => {
@@ -119,9 +122,13 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <NavLink to="/cart" className="nav-link" href="#">
-                  Cart(0)
+              <Badge count={cart?.length} showZero>
+      
+                <NavLink to="/cart" className="nav-link">
+                  {/* Cart{cart?.length} */}
+                  Cart
                 </NavLink>
+    </Badge>
               </li>
             </ul>
           </div>
