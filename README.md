@@ -73,3 +73,4 @@ search product page creation
 product details page creation.
 product by category page set up
 cart page set up.
+a) Profile page and authController page set up.
