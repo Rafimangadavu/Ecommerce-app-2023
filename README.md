@@ -73,4 +73,8 @@ search product page creation
 product details page creation.
 product by category page set up
 cart page set up.
+1) Set up payment gateway use paypal braintree.
 a) Profile page and authController page set up.
+b) npm install braintree.
+c)npm install braintree-web-drop-in-react.
+d)make paymet button.
