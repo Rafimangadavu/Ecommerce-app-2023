@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../../components/Layout/Layout';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/AuthStyle.css';
 
@@ -20,13 +20,17 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address, answer }
-      );
-      if (res.data.success) {
+      const res = await axios.post('/api/v1/auth/register', {
+        name,
+        email,
+        password,
+        phone,
+        address,
+        answer,
+      });
+      if (res && res.data.success) {
         toast.success(res.data && res.data.message);
-        navigate('/login');
+        navigate('./Login.js');
       } else {
         toast.error(res.data.message);
       }
@@ -44,13 +48,13 @@ const Register = () => {
           <div className="mb-3">
             <input
               type="text"
-              autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="form-control"
               id="exampleInputName"
               placeholder="Enter Your Name"
               required
+              autoFocus
             />
           </div>
           <div className="mb-3">

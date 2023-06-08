@@ -10,8 +10,8 @@ import { Badge } from 'antd';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-  const[cart] = useCart()
-  const categories = useCategory()
+  const [cart] = useCart();
+  const categories = useCategory();
 
   const handleLogout = () => {
     setAuth({
@@ -54,7 +54,7 @@ const Header = () => {
             </Link>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <SearchInput />
+              <SearchInput />
               <li className="nav-item">
                 <NavLink to="/" className="nav-link ">
                   Home
@@ -62,22 +62,33 @@ const Header = () => {
               </li>
 
               <li className="nav-item dropdown">
-  <Link className="nav-link dropdown-toggle" to={"/categories"} data-bs-toggle="dropdown" >
-    Categories
-  </Link>
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to={'/categories'}
+                  data-bs-toggle="dropdown"
+                >
+                  Categories
+                </Link>
 
-  <ul className="dropdown-menu">
-  <li>
-  <Link to={"/categories"} className="dropdown-item">All Categories</Link>
-  </li>
-  {categories?.map((c, index)=>(
-    <li>
-    
-    <Link to={`/category/${c.slug}`} key={index} className="dropdown-item">{c.name}</Link>
-    </li>  
-  ))}
-  </ul>
-</li>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link to={'/categories'} className="dropdown-item">
+                      All Categories
+                    </Link>
+                  </li>
+                  {categories?.map((c, index) => (
+                    <li>
+                      <Link
+                        to={`/category/${c.slug}`}
+                        key={index}
+                        className="dropdown-item"
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
               {!auth.user ? (
                 <>
                   <li className="nav-item">
@@ -104,7 +115,12 @@ const Header = () => {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user" }`} className="dropdown-item">
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? 'admin' : 'user'
+                          }`}
+                          className="dropdown-item"
+                        >
                           Dashboard
                         </NavLink>
                       </li>
@@ -122,13 +138,12 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-              <Badge count={cart?.length} showZero>
-      
-                <NavLink to="/cart" className="nav-link">
-                  {/* Cart{cart?.length} */}
-                  Cart
-                </NavLink>
-    </Badge>
+                <Badge count={cart?.length} showZero>
+                  <NavLink to="/cart" className="nav-link">
+                    {/* Cart{cart?.length} */}
+                    Cart
+                  </NavLink>
+                </Badge>
               </li>
             </ul>
           </div>
