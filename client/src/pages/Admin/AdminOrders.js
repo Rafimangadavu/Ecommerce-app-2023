@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../../components/Layout/Layout';
-import UserMenu from '../../components/Layout/UserMenu';
+import React, { useEffect, useState } from 'react'
+import Layout from '../../components/Layout/Layout'
+import AdminMenu from '../../components/Layout/AdminMenu'
+import moment from 'moment';
 import axios from 'axios';
 import { useAuth } from '../../context/auth';
-import moment from 'moment'
+import {Select} from 'antd';
+const { Option } = Select;
 
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const [auth, setAuth] = useAuth();
-
-  const getOrders = async () => {
-    try {
-      const { data } = await axios.get('/api/v1/auth/orders');
-      setOrders(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (auth?.token) getOrders();
-  }, [auth?.token]);
+const AdminOrders = () => {
+    const [status, setStatus] = useState(['Not Process', 'Processing', 'Shipped', 'deliverd', 'cancel']);
+    const [changeStatus, setChangeStatus] = useState('')
+    const [orders, setOrders] = useState([]);
+    const [auth, setAuth] = useAuth();
+  
+    const getOrders = async () => {
+      try {
+        const { data } = await axios.get("/api/v1/auth/all-orders");
+        setOrders(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    useEffect(() => {
+      if (auth?.token) getOrders();
+    }, [auth?.token]);
 
   return (
-    <Layout title={'Your Orders'}>
-      <div className="container-fluid p-3 m-3">
+    <Layout title={'All Orders Data'}>
         <div className="row">
-          <div className="col-md-3">
-            <UserMenu />
-          </div>
-          <div className="col-md-9">
-            <h1 className="text-center">All Orders</h1>
-            {orders?.map((o, i) => {
+            <div className="col-md-3">
+                <AdminMenu />
+            </div>
+            <div className="col-md-9">
+                <h1 className='text-center'>All Orders</h1>
+                {orders?.map((o, i) => {
               return (
                 <div className="border shadow" key={i}>
                   <table className="table">
@@ -48,7 +51,13 @@ const Orders = () => {
                     <tbody>
                         <tr>
                             <td>{i + 1}</td>
-                            <td>{o?.status}</td>
+                            <td>
+                                <Select bordered={false} onChange={(value)=> setChangeStatus(value)} defaultValue={o?.status}>
+                                {status.map((s,i) => (
+                                    <Option key={i} value={status}>{s}</Option>
+                                ))}
+                                </Select>
+                            </td>
                             <td>{o?.buyer?.name}</td>
                             <td>{moment(o?.creatAt).fromNow()}</td>
                             <td>{o?.payment.success? "Success": "Failed"}</td>
@@ -80,11 +89,10 @@ const Orders = () => {
                 </div>
               );
             })}
-          </div>
+            </div>
         </div>
-      </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Orders;
+export default AdminOrders

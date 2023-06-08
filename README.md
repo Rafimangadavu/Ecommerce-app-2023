@@ -78,3 +78,7 @@ a) Profile page and authController page set up.
 b) npm install braintree.
 c)npm install braintree-web-drop-in-react.
 d)make paymet button.
+e) Order page setup after payment.
+f) Users order setup.
+g)admin order page setup.
+h)diployment.

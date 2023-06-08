@@ -1,6 +1,7 @@
 import { compare } from 'bcrypt';
 import { comparePassword, hashPassword } from '../helpers/authHelper.js';
 import userModel from '../models/userModel.js';
+import orderModel from '../models/orderModel.js';
 import JWT from 'jsonwebtoken';
 
 export const registerController = async (req, res) => {
@@ -176,7 +177,7 @@ export const updateProfileController = async (req, res) => {
   try {
     const { name, password, address, phone } = req.body;
     const user = await userModel.findById(req.user._id);
-//password
+    //password
     if (password && password.length < 6) {
       return res.json({ error: 'Password is required and 6 character long' });
     }
@@ -201,6 +202,42 @@ export const updateProfileController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: 'Error while Updating Profile',
+    });
+  }
+};
+
+//orders controller
+export const getOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.user._id })
+      .populate('products', '-photo')
+      .populate('buyer', 'name');
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'error while geting orders',
+    });
+  }
+};
+
+//all orders
+export const getAllOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({})
+      .populate('products', '-photo')
+      .populate('buyer', 'name')
+      .sort({ createdAt: '-1' });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'error while geting all orders',
+      error,
     });
   }
 };
