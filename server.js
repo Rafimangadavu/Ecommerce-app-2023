@@ -17,8 +17,8 @@ dotenv.config();
 connectDB();
 
 //esmodule fix
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 //rest object
 const app = express();
