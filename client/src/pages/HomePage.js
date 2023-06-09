@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout/Layout';
+import { AiOutlineReload } from "react-icons/ai";
 import axios from 'axios';
 import { Checkbox, Radio } from 'antd';
 import { Prices } from '../components/Prices';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
 import { toast } from 'react-toastify';
-
+import '../styles/Homepage.css'
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [cart, setCart] = useCart()
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const[loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   //get all categories
   const getAllCategory = async () => {
@@ -36,44 +37,44 @@ const HomePage = () => {
     getTotal();
   }, []);
 
-    //get total count
-     const getTotal = async () => {
+  //get total count
+  const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await axios.get('/api/v1/product/product-count');
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(()=>{
-    if(page === 1) return
-    loadMore()
-  },[page])
+  useEffect(() => {
+    if (page === 1) return;
+    loadMore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   //load more
   const loadMore = async () => {
-    try{
-      setLoading(true)
-      const {data} = await axios.get(`/api/v1/product/product-list/${page}`)
-      setLoading(false)
-      setProducts([...products, ...data.products])
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      setLoading(false);
+      setProducts([...products, ...data.products]);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
-    catch(error){
-      console.log(error)
-      setLoading(false)
-    }
-  }
+  };
 
   //get products
   const getAllProducts = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
-      setLoading(false)
+      setLoading(false);
       setProducts(data.products);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
@@ -91,12 +92,12 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!checked.length || !radio.length) getAllProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked.length, radio.length]);
 
   useEffect(() => {
     if (checked.length || radio.length) filterProduct();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked, radio]);
 
   //get filterd product
@@ -116,8 +117,17 @@ const HomePage = () => {
     <Layout title={'All Products - Best Offers'}>
       {/* <h1>HomePage</h1>
         <pre>{JSON.stringify(auth, null, 4)}</pre> */}
-      <div className="row mt-3">
-        <div className="col-md-2">
+
+      {/* banner image */}
+      <img
+        src="/images/banner.png"
+        alt="bannerimage"
+        className="banner-img"
+        width={'100%'}
+      />
+
+      <div className="container-fluid row mt-3 home-page">
+        <div className="col-md-3 filters">
           <h4 className="text-center">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
@@ -151,48 +161,73 @@ const HomePage = () => {
         </div>
         <div className="col-md-9">
           {/* {JSON.stringify(radio, null, 4)} */}
+
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
-            {products?.map((p,index) => (
-              <div className="card m-2" key={index} style={{ width: '18rem' }}>
+            {products?.map((p) => (
+              <div className="card m-2" key={p._id} style={{ width: '18rem' }}>
                 <img
                   src={`/api/v1/product//product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{p.name}</h5>
+                  <div className="card-name-price">
+                    <h5 className="card-title">{p.name}</h5>
+                    <h5 className="card-title card-price">
+                      {p.price.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                      })}
+                    </h5>
+                  </div>
                   <p className="card-text">
-                    {p.description.substring(0, 30)}...
+                    {p.description.substring(0, 60)}...
                   </p>
-                  <p className="card-text"> $ {p.price}</p>
-                  <button className="btn btn-primary ms-1" onClick={()=>navigate(`/product/${p.slug}`)}>More Details</button>
-                  <button className="btn btn-secondary ms-1" 
-                  onClick={()=>{
-                  setCart([...cart, p]);
-                  localStorage.setItem('cart', JSON.stringify([...cart, p]))
-                  toast.success('Item Added to cart')}
-                  }
-                  >
-                    ADD TO CART
-                  </button>
+                  <div className="card-name-price">
+                    <button
+                      className="btn btn-primary ms-1"
+                      onClick={() => navigate(`/product/${p.slug}`)}
+                    >
+                      More Details
+                    </button>
+                    <button
+                      className="btn btn-dark ms-1"
+                      onClick={() => {
+                        setCart([...cart, p]);
+                        localStorage.setItem(
+                          'cart',
+                          JSON.stringify([...cart, p])
+                        );
+                        toast.success('Item Added to cart');
+                      }}
+                    >
+                      ADD TO CART
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-           <div className='m-2 p-3'>
+          <div className="m-2 p-3">
             {products && products.length < total && (
-              <button className='btn btn-warning' 
-              onClick={(e)=>{
-                e.preventDefault();
-                setPage(page + 1);
-              }}
+              <button
+                className="btn loadmore"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}
               >
-                {loading ? "Loading ..." : "Loadmore"}
+                {loading ? ('Loading ...') :( 
+                  <>
+                  {" "}
+                  'Loadmore'<AiOutlineReload />
+                </>
+                  )          
+                }
               </button>
             )}
-          </div> 
-          
+          </div>
         </div>
       </div>
     </Layout>

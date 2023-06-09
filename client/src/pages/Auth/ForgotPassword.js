@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/AuthStyle.css';
 import { useNavigate } from "react-router-dom";
+import '../../styles/AuthStyle.css'
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
